@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Grandpa An&#39;s Blog</title>
+  
+  <subtitle>学习、生活</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2017-09-17T11:15:39.683Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Grandpa An</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在安卓上部署服务器 – 解决内网穿透</title>
+    <link href="http://yoursite.com/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E8%A7%A3%E5%86%B3%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+    <id>http://yoursite.com/2017/09/17/在安卓上部署服务器 – 解决内网穿透/</id>
+    <published>2017-09-17T00:26:38.000Z</published>
+    <updated>2017-09-17T11:15:39.683Z</updated>
+    
+    <content type="html"><![CDATA[<p>介绍在安卓设备上部署个人博客中遇到的内网穿透问题，主要是ngrok的使用介绍</p><a id="more"></a><p>本系列其他文章：</p><p>1.<a href="https://grandpaan.github.io/2017/09/17/%E5%86%99%E4%B8%80%E4%BA%9B%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E4%B8%9C%E8%A5%BF/" target="_blank">在安卓上部署服务器</a><br>2.<a href="https://grandpaan.github.io/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E9%85%8D%E7%BD%AE/" target="_blank">在安卓上部署服务器 – 应用程序的配置</a><br>3.<a href="https://grandpaan.github.io/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E8%A7%A3%E5%86%B3%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" target="_blank">在安卓上部署服务器 – 解决内网穿透问题</a><br>4.<a href="https://grandpaan.github.io/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC%E5%92%8C%E5%8D%9A%E5%AE%A2/" target="_blank">在安卓上部署服务器 – 部署脚本和博客</a> </p><p>上篇文章讲了总体情况和相关应用的配置，这篇文章解决内网穿透问题。</p><p>我需要把手机放家里或者宿舍，这时使用的是内网，没有公网的固定IP，没法进行域名解析，这时候就需要内网穿透了。上篇文章中提到使用ngrok进行内网穿透。ngrok适合测试，不适合商用，想进行长期使用或者商用的同志们选择合适的平台。</p><p>1、首先在 <a href="http://ngrok.cc" target="_blank">http://ngrok.cc</a> 注册成为会员</p><p>2、开通隧道</p><p><a href="http://op6aicuc2.bkt.clouddn.com/%E5%BC%80%E9%80%9A%E9%9A%A7%E9%81%93-doc.png" target="_blank" rel="external">http://op6aicuc2.bkt.clouddn.com/%E5%BC%80%E9%80%9A%E9%9A%A7%E9%81%93-doc.png</a><br><a href="http://op6aicuc2.bkt.clouddn.com/%E5%BC%80%E9%80%9A%E9%9A%A7%E9%81%93.png" target="_blank" rel="external">http://op6aicuc2.bkt.clouddn.com/%E5%BC%80%E9%80%9A%E9%9A%A7%E9%81%93.png</a></p><p>在上图中表单信息解释：</p><p>=&gt;隧道名称：可以随便填写，只是为了使用者在往后之后这个隧道是干嘛的</p><p>=&gt;前置域名：服务器免费赠送的域名，请不要带上后缀，如果要<a href="http://ZKeeer.ngrok.cc" target="_blank" rel="external">http://ZKeeer.ngrok.cc</a> 只需要填写 ZKeeer即可 ，千万不要填写成<a href="http://ZKeeer.ngrok.cc否则域名会是http://ZKeeer.ngrok.cc.ngrok.cc" target="_blank" rel="external">http://ZKeeer.ngrok.cc否则域名会是http://ZKeeer.ngrok.cc.ngrok.cc</a></p><p>=&gt;本地端口：可以为同一个局域网内任意一台机器进行映射，只需要本地ip和端口就行，例如：127.0.0.1:80。</p><p>端口填写运行Blog_mini时填写的端口端口填写运行Blog_mini时填写的端口</p><p>端口填写运行Blog_mini时填写的端口</p><p>=&gt;http验证用户名：非必填项，在需要的时候填写，否则可以不填</p><p>=&gt;http验证密码：非必填项，在需要的时候填写，否则可以不填</p><p>3、编辑隧道，添加自定义域名</p><p><a href="http://op6aicuc2.bkt.clouddn.com/%E9%9A%A7%E9%81%93%E7%BC%96%E8%BE%91.png" target="_blank" rel="external">http://op6aicuc2.bkt.clouddn.com/%E9%9A%A7%E9%81%93%E7%BC%96%E8%BE%91.png</a></p><p>4、解析域名到<br>&emsp;&emsp;<a href="http://server.ngrok.cc" target="_blank" rel="external">http://server.ngrok.cc</a></p><p>&emsp;&emsp;<a href="http://op6aicuc2.bkt.clouddn.com/CANME%E8%A7%A3%E6%9E%90.png" target="_blank" rel="external">http://op6aicuc2.bkt.clouddn.com/CANME%E8%A7%A3%E6%9E%90.png</a></p><p>&emsp;&emsp;或者这样</p><p>&emsp;&emsp;<a href="http://op6aicuc2.bkt.clouddn.com/%E8%A7%A3%E6%9E%90.png" target="_blank" rel="external">http://op6aicuc2.bkt.clouddn.com/%E8%A7%A3%E6%9E%90.png</a></p><p>&emsp;&emsp;至此，网络端配置完成，接下来是安卓本地的配置</p><p>5、下载ngrok客户端，选择Linux ARM版本</p><p><a href="http://op6aicuc2.bkt.clouddn.com/ngrok%E7%89%88%E6%9C%AC%E9%80%89%E6%8B%A9.png" target="_blank" rel="external">http://op6aicuc2.bkt.clouddn.com/ngrok%E7%89%88%E6%9C%AC%E9%80%89%E6%8B%A9.png</a></p><p>因为手机没浏览器什么的，下载也不方便，若是不会下载的，可以在系统里安装git，然后用git在个ithub上面下载下来，这里提供我的<a href="https://github.com/GrandpaAn/Resource" target="_blank">github资源</a>  利用命令 git clone git@github.com:GrandpaAn/Resource.git 就能下载</p><p>6、启动映射服务</p><p><a href="http://op6aicuc2.bkt.clouddn.com/%E9%9A%A7%E9%81%931.png" target="_blank" rel="external">http://op6aicuc2.bkt.clouddn.com/%E9%9A%A7%E9%81%931.png</a></p><p>Linux系统下启动，需要进入到客户端的目录执行以下命令，通过隧道管理找到隧道id，然后执行</p><p>./sunny clientid 隧道id</p><p><a href="http://op6aicuc2.bkt.clouddn.com/%E9%9A%A7%E9%81%932.png" target="_blank" rel="external">http://op6aicuc2.bkt.clouddn.com/%E9%9A%A7%E9%81%932.png</a></p><p>看到这样则是成功启动一条隧道，启动多条隧道把多条隧道id使用英文逗号隔开就可以了。例如：</p><p>./sunny clientid c7fb2defb4081919,3e23d14f040b2b12</p><p>上面命令就可以启动多条隧道了</p><p>7、访问服务</p><p><img src="http://ow1mimn9p.bkt.clouddn.com/A96DABC6FBB2D86E40510F809E9473FC.jpg" alt="success"></p><p>然后通过启动成功界面上的链接访问网站如果显示是内网搭建的web服务里面的内容就说明成功了</p><p>【注意】在开启隧道前建立web服务</p><p>【注意】在开启隧道前建立web服务</p><p>【注意】在开启隧道前建立web服务</p><p>参考文章：</p><p><a href="http://www.sunnyos.com/article-show-68.html" target="_blank">Sunny-Ngrok 自定义域名使用方法</a> </p><p><a href="http://www.sunnyos.com/article-show-67.html" target="_blank">Sunny-Ngrok http前置域名使用方法</a> </p><p>&emsp;&emsp;摘录自 ZKeeer’s Blog</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;介绍在安卓设备上部署个人博客中遇到的内网穿透问题，主要是ngrok的使用介绍&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在安卓上部署服务器 – 部署脚本和博客</title>
+    <link href="http://yoursite.com/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC%E5%92%8C%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://yoursite.com/2017/09/17/在安卓上部署服务器 – 部署脚本和博客/</id>
+    <published>2017-09-17T00:26:38.000Z</published>
+    <updated>2017-09-17T11:15:53.398Z</updated>
+    
+    <content type="html"><![CDATA[<p>在进行完手机端应用配置和内网穿透平台ngrok配置之后，进行博客的部署介绍，以开源博客系统Blog_mini为例。</p><a id="more"></a><p>本系列其他文章：</p><p>1.<a href="https://grandpaan.github.io/2017/09/17/%E5%86%99%E4%B8%80%E4%BA%9B%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E4%B8%9C%E8%A5%BF/" target="_blank">在安卓上部署服务器</a><br>2.<a href="https://grandpaan.github.io/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E9%85%8D%E7%BD%AE/" target="_blank">在安卓上部署服务器 – 应用程序的配置</a><br>3.<a href="https://grandpaan.github.io/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E8%A7%A3%E5%86%B3%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" target="_blank">在安卓上部署服务器 – 解决内网穿透问题</a><br>4.<a href="https://grandpaan.github.io/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC%E5%92%8C%E5%8D%9A%E5%AE%A2/" target="_blank">在安卓上部署服务器 – 部署脚本和博客</a> </p><p>到这里我就不多解释了，这里就看自己能做出什么样子的博客来了，下面转载自 <a href="http://zkeeer.space/?p=94" target="_blank">ZKeeer’s Blog–在安卓上部署服务器 – 部署脚本和博客</a><br>0.说明</p><p>本文只介绍最简单的配置，详细配置见作者博客。</p><p>这里使用的操作系统为：Ubuntu 15.10，理论上，只要操作系统上安装的Python版本为2.6.x或2.7.x，都可以成功部署Blog_mini。</p><p>1.获取Blog_mini源代码</p><p>有以下两种方式可以获取Blog_mini的源代码：</p><p>=&gt;通过git的方式</p><p>=&gt;通过Blog_mini项目主页下载</p><p>下载完成后，将其解压缩并传到Ubuntu操作系统中即可</p><p>2.安装python和pip</p><p>执行下面的命令安装即可：</p><p>ZKeeer@localhost:~/project/Blog_mini$ sudo apt-get install python</p><p>ZKeeer@localhost:~/project/Blog_mini$ sudo apt-get install python-pip</p><p>3.安装virtualenv</p><p>执行下面的命令安装即可：</p><p>ZKeeer@localhost:~/project/Blog_mini$ sudo apt-get install virtualenv</p><p>如果上面的命令说找不到virtualenv的，就使用下面的命令：</p><p>ZKeeer@localhost:~/project/Blog_mini$ sudo apt-get install python-virtualenv</p><p>4.创建虚拟环境venv</p><p>在Blog_mini目录下执行下面的命令：</p><p>ZKeeer@localhost:~/project/Blog_mini$ virtualenv venv</p><p>Running virtualenv with interpreter /usr/bin/python2</p><p>New python executable in venv/bin/python2</p><p>Also creating executable in venv/bin/python</p><p>Installing setuptools, pip…done.</p><p>可以在Blog_mini下看到生成了一个venv目录：</p><p>ZKeeer@localhost:~/project/Blog_mini$ ls</p><p>app LICENSE migrations README.md requirements.txt</p><p>config.py manage.py Procfile requirements venv</p><p>5.激活虚拟环境venv</p><p>在Blog_mini目录下：</p><p>ZKeeer@localhost:~/project/Blog_mini$ source venv/bin/activate</p><p>(venv)ZKeeer@localhost:~/project/Blog_mini$</p><p>6.安装Blog_mini需求文件</p><p>执行如下命令：</p><p>(venv)ZKeeer@localhost:~/project/Blog_mini$ pip install -r requirements/common.txt</p><p>因为这里要安装Blog_mini所需的一些扩展包，所以需要一定时间，当然如果网络良好的话，很快就可以安装完成。</p><p>来看这一步，除了数据库的配置以外，Blog_mini的全部需求环境已经搭建好了，接下来要完成下面的两个任何之一：</p><p>=&gt;使用sqlite作为默认数据库来运行Blog_mini</p><p>=&gt;使用MySQL作为默认数据库来运行Blog_mini</p><p>数据库的使用只需要使用其中一种即可。</p><p>为了测试，选用了sqlite，其他详细配置参考作者博客</p><p>7.使用sqlite作为默认数据库来运行Blog_mini</p><p>Python本身就自带了sqlite数据库，因此如果你要使用sqlite来作为默认数据库，你不需要做任何配置。</p><p>接下来要做的就是运行Blog_mini了。</p><p>生成Blog_mini所需要的系统默认数据，请在Blog_mini目录下执行下面的命令：</p><p>(venv)ZKeeer@localhost:~/project/Blog_mini$ python manage.py deploy product</p><p>INFO [alembic.runtime.migration] Context impl SQLiteImpl.</p><p>INFO [alembic.runtime.migration] Will assume non-transactional DDL.</p><p>INFO [alembic.runtime.migration] Running upgrade -&gt; 051691f120e6, fit to MySQL</p><p>如果出现上面的提示就说明成功了！对于最后面出现的’fit to MySQL’大家不用觉得疑惑，这只是当时的一个备注，用来注明后面你要使用MySQL也是可以的，没有太大的意义。</p><p>运行Blog_mini：</p><p>(venv)ZKeeer@localhost:~/project/Blog_mini$ gunicorn manage:app</p><p>[2016-03-08 11:49:11 +0000] [7189] [INFO] Starting gunicorn 19.4.5</p><p>[2016-03-08 11:49:11 +0000] [7189] [INFO] Listening at: <a href="http://127.0.0.1:8000" target="_blank" rel="external">http://127.0.0.1:8000</a> (7189)</p><p>[2016-03-08 11:49:11 +0000] [7189] [INFO] Using worker: sync</p><p>[2016-03-08 11:49:11 +0000] [7194] [INFO] Booting worker with pid: 7194</p><p>上面的提示就说明Blog_mini已经成功运行了！不过这样的运行方式只能在本机以8000端口访问，如果你的Ubuntu操作系统本身没有GUI界面的话，你在本机也没有办法访问，所以我们可以用下面的方式运行。</p><p>以80端口运行Blog_mini：</p><p>(venv)ZKeeer@localhost:~/project/Blog_mini$ gunicorn -b 0.0.0.0:80 manage:app</p><p>[2016-03-08 11:50:43 +0000] [7202] [INFO] Starting gunicorn 19.4.5</p><p>[2016-03-08 11:50:43 +0000] [7202] [INFO] Listening at: <a href="http://0.0.0.0:80" target="_blank" rel="external">http://0.0.0.0:80</a> (7202)</p><p>[2016-03-08 11:50:43 +0000] [7202] [INFO] Using worker: sync</p><p>[2016-03-08 11:50:43 +0000] [7207] [INFO] Booting worker with pid: 7207</p><p>不过，如果无法访问的话，那可能是防火墙的问题，你可以先把防火墙关掉：</p><p>ZKeeer@localhost:~$ sudo ufw disable</p><p>[sudo] ZKeeer 的密码：</p><p>到了这一步，你已经是成功地把Blog_mini的服务器部署好了。</p><p>Blog_mini支持后台管理（在主页底栏有’后台管理’登陆链接，点击即可进入登陆页面），下面是Blog_mini管理后台的默认账号密码：</p><p>账号：blog_mini@163.com</p><p>密码：blog_mini</p><p>提示：在部署完Blog_mini后，里面是没有任何数据的，如果你需要一定的数据来测试Blog_mini的功能，可以在完成上面的操作后执行下面的命令：</p><p>(venv)xpleaf@leaf:~/project/Blog_mini$ python manage.py deploy test_data</p><p>这将会生成100篇博文和700条评论，同时还有博文分类和系统导航，以方便你验证Blog_mini的功能。</p><p>参考文章及资料：</p><p>代码地址：<a href="https://github.com/xpleaf/Blog_mini" target="_blank">xpleaf/Blog_mini</a></p><p>部署地址：<a href="http://xpleaf.blog.51cto.com/blog/9315560/1748871" target="_blank">Blog_mini完整部署文档 – 香飘叶子 – 51CTO技术博客</a></p><p>试用地址：115.159.72.250:8080</p><p>帐号：blog_mini@163.com</p><p>密码：blog_mini</p><p>作者51cto博客：<a href="http://xpleaf.blog.51cto.com/" target="_blank">香飘叶子 – 51CTO技术博客 – 领先的IT技术博客</a> </p><p>作者个人博客网站：<a href="http://www.xpleaf.com/" target="_blank">http://www.xpleaf.com</a></p><p>&emsp;&emsp;摘录自 ZKeeer’s Blog</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在进行完手机端应用配置和内网穿透平台ngrok配置之后，进行博客的部署介绍，以开源博客系统Blog_mini为例。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>写点有意思的东西--安卓手机部署服务器</title>
+    <link href="http://yoursite.com/2017/09/17/%E5%86%99%E4%B8%80%E4%BA%9B%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E4%B8%9C%E8%A5%BF/"/>
+    <id>http://yoursite.com/2017/09/17/写一些有意思的东西/</id>
+    <published>2017-09-17T00:26:38.000Z</published>
+    <updated>2017-09-17T06:37:16.631Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp; 一直都在写关于自己的事，写自己的一些感受。现在也写一些有用点的东西，本文摘录自 ZKeeer’s Blog，然后也有一点自己的东西。<a href="http://zkeeer.space/?p=89" target="_blank" rel="external">ZKeeer’s Blog</a><br><a id="more"></a><br>&emsp;&emsp; 想着都在github上搭建了一个个人博客了，想自己用服务器搭建个个人博客，然而作为一个穷人，买不起大佬们的云服务器，看别人说用树莓派也可以，但我也是买不起的，机缘巧合之下看到了ZKeeer’s Blog写的一篇用安卓部署服务器的文章，然后自己试着配置了一下，原作者的文章解释得有点不太详细，这几篇文章我尽量解释得详细一点，当是给自己做些笔记，也让有缘人能学到东西。<br>&emsp;&emsp;下面引用原作者的<br>&emsp;&emsp;偶然间想起安卓的底层不就是linux吗？为什么安卓就不能刷成linux（可能驱动问题）或者部署一个linux。开始搜索“android部署linux”。结果有以下几种方案：</p><p>1.刷机成ubuntu touch。ubuntu touch是一个ubuntu移动版，专门为安卓机定制开发的，有人在谷歌亲儿子上刷了，都还不错。可惜的是，这个项目几年前停了，目前资料也不多。给你们链接，想玩的自己玩『原创』Nexus 4刷入Ubunu Touch和Android双系统以及上手体验<br>2.通过修改安卓刷机包的img，然后重新刷入。这个目前不够普及，作的死了都找不到稻草。给你们链接自己玩安卓设备运行原生 Debian（非 chroot）<br>3.通过linux deploy、linux installer、linux on android等应用进行部署linux。这个方案不影响安卓系统的正常运行。方法普及，参考资料多，作死了…也就作死了。<br>&emsp;&emsp;综合比较以上三种方案，选了第三个<br>&emsp;&emsp;1.使用的app：busybox、es文件浏览器、linux deploy、juicessh(android)/xshell(PC)，具体配置文章在<a href="https://grandpaan.github.io/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E9%85%8D%E7%BD%AE/" target="_blank">安卓上部署服务器 – 应用程序的配置</a><br>&emsp;&emsp;按顺序安装完以上app，在linux deploy上装好linux系统以后，你就可以挂载一些小脚本了，例如python的爬虫脚本、微信消息监听之类的。<br>&emsp;&emsp;2.但是我要搭一个博客，需要外网访问，宿舍的ip是动态的而且还是内网。解决方法是内网穿透。可以选择的解决方案有花生壳、frp、魔法隧道、ngrok…花生壳收费贼贵还限流限速、frp需要你的域名备案（我的.space没法备案），ngrok不需要备案，魔法隧道可能贵一些，大家自行选择。具体配置文章在 <a href="https://grandpaan.github.io/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E8%A7%A3%E5%86%B3%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" target="_blank">安卓上部署服务器 – 解决内网穿透问题</a>.<br>&emsp;&emsp;3.接下来就是部署博客，本文选取@yonghaoyip开发的Blog_mini系统进行演示。具体配置文章在 <a href="https://grandpaan.github.io/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC%E5%92%8C%E5%8D%9A%E5%AE%A2/" target="_blank">安卓上部署服务器 – 部署脚本和博客</a>.<br>&emsp;&emsp;4.启动博客和ngrok服务：顺序是先启动博客服务：切换到Blog_mini下，输入命令<br>gunicorn -b 0.0.0.0:8080 manage:app.<br>&emsp;&emsp;如果可以正常运行，Ctrl+C结束，开始挂后台<br>&emsp;&emsp;nohup gunicorn -b 0.0.0.0:8080 manage:app &amp;(虽然这条命令我没法运行)<br>&emsp;&emsp;接下来启动ngrok: ./sunny clientid 隧道id<br>&emsp;&emsp;5.部署完成，博客成功运行在我的安卓手机上了。博客地址：<a href="http://grandpaan.ngrok.cc" target="_blank">grandpaan.ngrok.cc</a>(可能有时候会上不去，有可能是我的手机关停服务或者没电了)<br>&emsp;&emsp;6.这样，家里闲置的安卓设备就能当服务器了。啦啦啦啦啦~<br><img src="http://ow1mimn9p.bkt.clouddn.com/%E6%8D%95%E8%8E%B71.JPG" alt="网页1"></p><p>&emsp;&emsp;摘录自 ZKeeer’s Blog</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;&amp;emsp; 一直都在写关于自己的事，写自己的一些感受。现在也写一些有用点的东西，本文摘录自 ZKeeer’s Blog，然后也有一点自己的东西。&lt;a href=&quot;http://zkeeer.space/?p=89&quot;&gt;ZKeeer’s Blog&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在安卓上部署服务器 – 应用程序的配置</title>
+    <link href="http://yoursite.com/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E9%85%8D%E7%BD%AE/"/>
+    <id>http://yoursite.com/2017/09/17/在安卓上部署服务器 – 应用程序的配置/</id>
+    <published>2017-09-17T00:26:38.000Z</published>
+    <updated>2017-09-17T11:24:32.007Z</updated>
+    
+    <content type="html"><![CDATA[<p>这里介绍Linux Deploy、JuiceSSH、BusyBox、XShell(PC端)基础配置和使用</p><a id="more"></a><p>本系列其他文章：</p><p>1.<a href="https://grandpaan.github.io/2017/09/17/%E5%86%99%E4%B8%80%E4%BA%9B%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E4%B8%9C%E8%A5%BF/" target="_blank">在安卓上部署服务器</a><br>2.<a href="https://grandpaan.github.io/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E9%85%8D%E7%BD%AE/" target="_blank">在安卓上部署服务器 – 应用程序的配置</a><br>3.<a href="https://grandpaan.github.io/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E8%A7%A3%E5%86%B3%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" target="_blank">在安卓上部署服务器 – 解决内网穿透问题</a><br>4.<a href="https://grandpaan.github.io/2017/09/17/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%20%E2%80%93%20%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC%E5%92%8C%E5%8D%9A%E5%AE%A2/" target="_blank">在安卓上部署服务器 – 部署脚本和博客</a> </p><p>&emsp;&emsp;原作者是介绍提到的四个app（BusyBox、ES文件浏览器、Linux Deploy、JuiceSSH(Android)/XShell(PC)）的配置和使用。<br>&emsp;&emsp;我用到的是(BusyBox、Turbo客户端、Linux Deploy、JuiceSSH(Android)/XShell 5(PC))。</p><p>&emsp;&emsp;原作者的手机的基础配置1G RAM+8G ROM（我自己的），最低配置：512M RAM + 4.xG ROM<br>&emsp;&emsp;而我的手机是魅蓝note2电信版，2G RAM+16G ROM 感觉已经够用了<br>1.在使用Linux Depoly之前，需要获取手机root权限。并且注意安装顺序BusyBox/ES文件浏览器-&gt;Linux Deploy-&gt;JuiceSSH。将Linux Deploy的后台配置设置为无限制，许多系统优化会有类似MIUI的神隐模式。<br>&emsp;&emsp;(当然我的安装顺序是BusyBox -&gt; Linux Deploy -&gt; JuiceSSH/Turbo客户端)，魅族手机自带的root都不能完全root，最好自己再下载kingroot或者其他root软件再root一次。<br>2.BusyBox：安装完打开，BusyBox会自动进行初始化，初始化完成再安装Linux Deploy比较好。<br>3.Linux Deploy是一款可以在Android设备上部署Linux环境的应用，，其原理大概是在Android的Linux层跑一个chroot或者proot容器，然后再在容器中运行我们准备好的另外一个Linux系统。值得注意的是，这与我们熟知的虚拟机技术不同，新的Linux系统将和Android系统平行运行(非专业解释不要深究)。<br>&emsp;&emsp;3.1打开Linux Deploy，我们需要在侧边栏 – Setting – Language中切换语言为”中文”。切换完成后，一直按返回键退出应用再重新进入应用，这时应用的显示语言已经被我们更改为中文了。<br>&emsp;&emsp;3.2接下来，我们将使用Linux Deploy在Android设备上部署Ubuntu系统:<br>&emsp;&emsp;点击界面最右下方的”属性”按钮进入配置文件的设置界面进行如下设置(我也不知道开发者为什么会用这么一个”下载”图标作为配置文件设置界面的图标):</p><p>=&gt;Containerization method:”chroot”</p><p>=&gt;发行版:”Ubuntu”</p><p>=&gt;架构:保持默认值</p><p>=&gt;发行版版本:”yakkety”(即Ubuntu 16.10)</p><p>=&gt;源地址:<a href="http://mirror.tuna.tsinghua.edu.cn/ubuntu-ports/" target="_blank">http://mirror.tuna.tsinghua.edu.cn/ubuntu-ports/</a> (因为默认源速度不佳，为了不下载一天一夜，我们这里使用的是清华大学的开源镜像源)</p><p>=&gt;安装类型:这一选项的话有两种建议，”目录”和”文件”，如果对Linux不太熟悉并且/data分区剩余空间≥2g的话，建议使用”目录”的安装方式，如果对Linux比较熟悉或者/data分区剩余空间&lt;2g的话，建议使用”文件”的安装方式。在这里，使用”目录”的安装方式。</p><p>=&gt;安装路径:”安装路径”选择”目录”时，这个选项将定义系统安装在哪个路径中，默认路径为${ENV_DIR}/rootfs/linux，即安装在/data/user/0/ru.meefik.linuxdeploy/env/rootfs/linux目录下。”安装类型”选择”文件”时，这个选项将定义系统安装在哪个镜像文件中，默认值为”外置存储/linux.img。</p><p>=&gt;镜像大小(MB)(安装类型”选择”文件”时可用):这个选项将定义系统所在镜像文件的大小。系统安装之前将在安装目录创建一个大小为设置的镜像大小的空文件用来存放系统文件和数据(相当于新Linux系统的总磁盘空间)。建议不要用默认值，填写2048m足够了。</p><p>=&gt;文件系统(安装类型”选择”文件”时可用):选择”自动”就好。</p><p>=&gt;用户名:这个选项为登录系统时的用户名，默认为”android”，可以随意更改。</p><p>=&gt;用户密码:这个选项为Ubuntu系统中用户的密码，可以根据自己的习惯填写。</p><p>=&gt;Privileged Users:保持默认值”root”</p><p>=&gt;DNS服务器:可以保持默认值，也可自定义填写DNS服务器地址(如114.114.114.114等)</p><p>=&gt;本地化:建议保持默认值POSIX，如果有其他需求，比如ssh返回结果中文化/VNC中文化时，选择”zh_CN.UTF8”</p><p>=&gt;INIT/MOUNTS项:若有需求时可以设置，无需求可以忽略。</p><p>=&gt;允许SSH服务器启动:打开此选项</p><p>=&gt;SSH设置:保持默认</p><p>=&gt;允许图形界面启动:若有需求可以设置，这里暂时不打开这个选项<br>&emsp;&emsp;(以上都是原作者的配置，下面是我的配置方式)<br><img src="http://ow1mimn9p.bkt.clouddn.com/EA285AEDD5CC222FD6C5DA0507381E53.jpg" alt="1"><br><img src="http://ow1mimn9p.bkt.clouddn.com/8B75C396C7D4CC5388F93A9AD6FE1471.jpg" alt="2"><br><img src="http://ow1mimn9p.bkt.clouddn.com/CCAA804D2D78BFB857D001F4D8F7F398.jpg" alt="3"><br><img src="http://ow1mimn9p.bkt.clouddn.com/78B0A1D590242C4FAE574DC8151AFE5C.jpg" alt="4"><br>&emsp;&emsp;因为我安装的linux deploy没有作者的yakkety，所以安装了kali linux系统，安装什么系统都不要紧，主要是能把手机当电脑使<br>&emsp;&emsp;然后源地址因为原来的下了两次都失败了，所以用了别人在网上分享的源地址，亲测可用，下载很快   <a href="http://202.141.160.110/kali/" target="_blank" rel="external">http://202.141.160.110/kali/</a><br>&emsp;&emsp;安装类型为目录的，图形界面可要可不要，手机这么小的屏幕觉得用起桌面来也不方便，所以也就懒得勾选<br>&emsp;&emsp;然后就可以安装了<br>&emsp;&emsp;3.3设置完成后，按返回键返回到应用主界面，按下菜单键，选择”安装”开始Linux系统的安装，安装过程中需要一直保持网络连接(建议在WIFI下安装，大概需要几百兆流量)。<br>&emsp;&emsp;当看到终端输出”&gt;&gt;&gt;deploy”时，代表安装已开始<br>&emsp;&emsp;开始和完成中间约二十分钟，使用默认源三十分钟以上。<br>&emsp;&emsp;当看到终端输出”&lt;&lt;&lt;deploy”时，代表安装已完成。<br>要是你看到安装过程中有”warning”、”couldn’t found”什么的，估计要重新安装了，希望大家能下一次就成功。<br>点击主界面下方的”启动”按钮可以启动新安装的系统，点击”停止”可以停止系统。<br>要是看到”Starting extra/ssh … done”,至此，系统部署部分描述完毕。</p><ol><li>JuiceSSH配置和使用。部署完毕后，我们需要用到JuiceSSH之类的SSH工具来登录系统(这里以JuiceSSH为例)。</li></ol><p>点击连接-&gt;认证，新建一个认证：</p><p>=&gt;昵称：随便填写，用于标识认证，这里填写“用于标识认证”</p><p>=&gt;用户名：填写Linux Deploy上你填写过的用户名，因为我没改过，所以填android</p><p>=&gt;密码：填写Linux Deploy上你填写过的密码，这里是password</p><p>点击右上角√</p><p><img src="http://op6aicuc2.bkt.clouddn.com/%E6%96%B0%E5%BB%BA%E8%AE%A4%E8%AF%81.png" alt="JuiceSSH"></p><p>进入新建连接界面:</p><p>=&gt;昵称:可随意填写，用以标识SSH链接，这里填写“用于标识连接”</p><p>=&gt;类型:SSH</p><p>=&gt;地址:填写Linux Deploy应用标题栏中那个，这里是127.0.0.1</p><p>点击右上角√</p><p><img src="http://op6aicuc2.bkt.clouddn.com/Screenshot_2017-04-27-15-30-45-806_com.sonelli.juicessh.png" alt="JuiceSSH1"></p><p>在”连接列表”中点击刚刚新建的这个项目连接到我们刚刚部署好的系统，连接成功后界面如下:</p><p><img src="http://ow1mimn9p.bkt.clouddn.com/5A25ABB5C781F05314F6D5CD9318F692.jpg" alt="JuiceSSH2"></p><p>因为我们是通过普通用户android登陆系统的，接下来我们需要设置超级用户(root)的密码并且以超级用户的身份登陆系统，在终端中键入:sudo passwd root</p><p>终端将会提示用户输入root用户的密码并且再次输入一次以确认(输入密码时密码将不可见，连*都不会显示)。</p><p>设置完毕后，在终端键入命令su并输入刚刚设置好的root用户密码即可切换到root用户。</p><p>5.使用Xshell(PC端)登录：下载并安装Xshell后，文件-&gt;新建。</p><p>&emsp;&emsp;=&gt;名称、协议、主机、端口号都跟juicessh配置一样(主机那一栏填你linux上面显示的IP)</p><p>6.使用ES文件浏览器进行文件的管理:<br>=&gt;如果你是通过”目录”方式部署的Linux系统，那么你可以直接使用ES访问/data/user/0/ru.meefik.linuxdeploy/env/rootfs/linux来管理新系统中的文件</p><p>=&gt;如果你是通过”文件”方式部署的Linux系统，管理文件等操作就得依靠SFTP或者SSH了。SFTP具体配置见参考文章。</p><p>参考文章：<a href="http://www.linuxdiyf.com/linux/25730.html" target="_blank">Linux Deploy:在Android上部署Linux</a></p><p>&emsp;&emsp;摘录自 ZKeeer’s Blog</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这里介绍Linux Deploy、JuiceSSH、BusyBox、XShell(PC端)基础配置和使用&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>兄弟，一路走好</title>
+    <link href="http://yoursite.com/2017/09/16/%E5%85%84%E5%BC%9F/"/>
+    <id>http://yoursite.com/2017/09/16/兄弟/</id>
+    <published>2017-09-16T06:26:38.000Z</published>
+    <updated>2017-12-04T07:11:59.721Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp; 早上看朋友圈的时候，我都不敢去相信，我们的龙舟兄弟：刘维，已经离我们远去了。顿时，我感觉人的生命是那样的脆弱。<br><a id="more"></a><br>&emsp;&emsp; 有的人活着，他已经死了；有的人死了，他还活着。刘维会永远活在我们心中。，我永远会记得曾经跟一个叫刘维的兄弟划过龙舟。<br>&emsp;&emsp; 致我们永远的排头————刘维。<br><img src="http://ow1mimn9p.bkt.clouddn.com/IMG_20170916_152729.jpg" alt="1"></p><p><video width="700" height="393" controls="controls" src="http://oqqti9w9h.bkt.clouddn.com/i0508wdaydd.p701.1.mp4"></video><br><img src="http://ow1mimn9p.bkt.clouddn.com/Screenshot_2017-09-16-13-23-28-397_com.tencent.mm.png" alt="1"><br><img src="http://ow1mimn9p.bkt.clouddn.com/Screenshot_2017-09-16-13-28-19-614_com.tencent.mm.png" alt="2"><br><img src="http://ow1mimn9p.bkt.clouddn.com/Screenshot_2017-09-16-13-25-42-360_com.tencent.mm.png" alt="3"><br><img src="http://ow1mimn9p.bkt.clouddn.com/Screenshot_2017-09-16-13-25-30-008_com.tencent.mm.png" alt="4"><br><img src="http://ow1mimn9p.bkt.clouddn.com/Screenshot_2017-09-16-13-25-18-799_com.tencent.mm.png" alt="5"><br><img src="http://ow1mimn9p.bkt.clouddn.com/Screenshot_2017-09-16-13-24-48-118_com.tencent.mm.png" alt="6"><br><img src="http://ow1mimn9p.bkt.clouddn.com/Screenshot_2017-09-16-13-24-17-816_com.tencent.mm.png" alt="7"><br><img src="http://ow1mimn9p.bkt.clouddn.com/Screenshot_2017-09-16-13-24-10-185_com.tencent.mm.png" alt="8"><br><img src="http://ow1mimn9p.bkt.clouddn.com/Screenshot_2017-09-16-13-24-00-237_com.tencent.mm.png" alt="9"><br><img src="http://ow1mimn9p.bkt.clouddn.com/Screenshot_2017-09-16-13-23-46-406_com.tencent.mm.png" alt="10"><br><img src="http://ow1mimn9p.bkt.clouddn.com/Screenshot_2017-09-16-13-23-37-517_com.tencent.mm.png" alt="11"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;&amp;emsp; 早上看朋友圈的时候，我都不敢去相信，我们的龙舟兄弟：刘维，已经离我们远去了。顿时，我感觉人的生命是那样的脆弱。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="龙舟" scheme="http://yoursite.com/tags/%E9%BE%99%E8%88%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大四第一次折纸作品</title>
+    <link href="http://yoursite.com/2017/09/10/%E5%A4%A7%E5%9B%9B%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%8A%98%E7%BA%B8/"/>
+    <id>http://yoursite.com/2017/09/10/大四第一次折纸/</id>
+    <published>2017-09-10T02:37:42.000Z</published>
+    <updated>2017-09-14T02:17:14.779Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp;转眼间已是大四，大四已是我大学的最后一年了，这个学期过后，就要面临着找工作实习了</p><p>&emsp;&emsp;下面来放几张大四第一次的作品</p><p><img src="http://i2.bvimg.com/593768/857738cc14f2ab0b.jpg" alt="折纸1"><br><br><a id="more"></a><br><img src="http://i2.bvimg.com/593768/54790725c67134d8.jpg" alt="折纸2"><br> </p><p><img src="http://i2.bvimg.com/593768/a37d9c9ad1518d9b.jpg" alt="折纸3"><br> </p><p><img src="http://i2.bvimg.com/593768/426c29626d7e2187.jpg" alt="折纸4"><br> </p><p><img src="http://i2.bvimg.com/593768/29b26b05e7bebf81.jpg" alt="折纸5"><br> </p><p><img src="http://i2.bvimg.com/593768/f2d5b84ab8eabe3a.jpg" alt="折纸6"><br> </p><p><img src="http://i2.bvimg.com/593768/39b1aa83efcf96e3.jpg" alt="折纸7"><br> </p><p><img src="http://i2.bvimg.com/593768/d0eaa671085f371b.jpg" alt="折纸8"><br> </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;&amp;emsp;转眼间已是大四，大四已是我大学的最后一年了，这个学期过后，就要面临着找工作实习了&lt;/p&gt;
+&lt;p&gt;&amp;emsp;&amp;emsp;下面来放几张大四第一次的作品&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://i2.bvimg.com/593768/857738cc14f2ab0b.jpg&quot; alt=&quot;折纸1&quot;&gt;&lt;br /&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="折纸" scheme="http://yoursite.com/tags/%E6%8A%98%E7%BA%B8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>端午.龙舟情</title>
+    <link href="http://yoursite.com/2017/05/29/%E7%AB%AF%E5%8D%88.%E9%BE%99%E8%88%9F%E6%83%85/"/>
+    <id>http://yoursite.com/2017/05/29/端午.龙舟情/</id>
+    <published>2017-05-29T15:40:49.000Z</published>
+    <updated>2017-05-30T12:37:56.890Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp;今天是农历五月五，是龙舟人盛大的日子。</p><p>&emsp;&emsp;<font color="#dd0000" size="6">致曾经为荣誉而战的我们</font><br><br><img src="http://i2.muimg.com/593768/c7b930a4eb48938d.jpg" alt="龙舟1"><br><a id="more"></a><br><img src="http://i2.muimg.com/593768/1809a07cdbf023df.png" alt="龙舟2"></p><p>&emsp;&emsp;<font color="#dd0000" size="6">致曾经黑炭般的自己</font><br> </p><p><img src="http://i2.muimg.com/593768/84d8060627775b44.jpg" alt="龙舟3"></p><p><img src="http://i4.buimg.com/593768/4ad3134b1efe98d8.jpg" alt="龙舟4"></p><p><img src="http://i4.buimg.com/593768/d2d7fa2dbd727223.jpg" alt="龙舟5"></p><p>&emsp;&emsp;<font color="#dd0000" size="6">致我们疯狂的三年</font><br> </p><p><img src="http://i2.muimg.com/593768/84a496dcde4ae46d.jpg" alt="龙舟6"></p><p><img src="http://i2.muimg.com/593768/3d7534a52d1e1cfc.jpg" alt="龙舟7"></p><p>&emsp;&emsp;<font color="#dd0000" size="6">致曾经像疯狗一样拼搏的我们</font><br> </p><video width="700" height="393" controls="controls" src="http://oqqti9w9h.bkt.clouddn.com/%E6%89%8B%E6%9C%BAQQ%E8%A7%86%E9%A2%91_20160519204013.mp4" poster=""></video><p><video width="700" height="393" controls="controls" src="http://oqqti9w9h.bkt.clouddn.com/%E6%89%8B%E6%9C%BAQQ%E8%A7%86%E9%A2%91_20160519203853.mp4" poster=""></video> <!--autoplay="autoplay"--></p><p>&emsp;&emsp;<font color="#dd0000" size="6">致我们的龙舟情</font><br> </p><p><img src="http://i2.muimg.com/593768/3041a6e759a99b31.jpg" alt="龙舟8"></p><p><img src="http://i2.muimg.com/593768/3571faa44b24e13e.jpg" alt="龙舟9"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;&amp;emsp;今天是农历五月五，是龙舟人盛大的日子。&lt;/p&gt;
+&lt;p&gt;&amp;emsp;&amp;emsp;&lt;font color=&quot;#dd0000&quot; size=&quot;6&quot;&gt;致曾经为荣誉而战的我们&lt;/font&gt;&lt;br /&gt;&lt;br&gt;&lt;img src=&quot;http://i2.muimg.com/593768/c7b930a4eb48938d.jpg&quot; alt=&quot;龙舟1&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="龙舟" scheme="http://yoursite.com/tags/%E9%BE%99%E8%88%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>龙舟.回忆</title>
+    <link href="http://yoursite.com/2017/05/09/%E9%BE%99%E8%88%9F.%E5%9B%9E%E5%BF%86/"/>
+    <id>http://yoursite.com/2017/05/09/龙舟.回忆/</id>
+    <published>2017-05-09T01:40:42.000Z</published>
+    <updated>2017-05-18T16:15:19.246Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://i2.muimg.com/593768/510ef14a1fb1ee4a.jpg" alt="龙舟"></p><hr><p>&emsp;&emsp;虽然我不想认老，但现在已是大三下学期了，不得不说已经到了该退出的时候了。前几个星期听说贵州铜仁有场比赛的时候，而且比的还是标舟，我心里一直不能平静，心里一团火仿佛重新被点燃了一般，觉着这平淡的大学生活好像又有了一个目标一样，久违的热血流淌全身，感觉激情依旧，仍能应战，说战便战，把这次比赛当成是大学最后的疯狂，要疯就要一疯到底，也算是给大学生涯画上一个完美的句号。<a id="more"></a><br>&emsp;&emsp;五一放完假后第二天开始第一次训练，第一次训练来的人很多，大一大二大三的都来了，满船的人，发现西湖已好久没有如此热闹过了。第一次备赛训练，无论是大二的还是大三的死老头，这次都练趴了。久违的疲惫感，酸痛感，这也让我感到来龙舟队的意义所在。可惜好景不长，也不知是第一次训练练得太累还是如何，第二天训练来的人还不到上次的三分之二，这是我完全没有想到，这也是我两年多来第一次遇到这样的情况，因为训练辛苦而害怕，而逃避训练，我觉着这种情况不应该出现在一支正在备赛的队伍。<br>&emsp;&emsp;现在回想一下，也是，我们当初大二的时候带师弟总觉得比较懒散，也没像大四带我们那时那样，练得那么狠。正因为我们对新生的训练太过于松散，才导致现在的结果。而且我们大一训练的时候，他们训也不敢训练得太狠，生怕把我们伤了，上不去比赛，所以这训练才一年比一年松，留下来的人也越来越少。我们练新生的时候，因为以前我们也体验过划桨划到手掌屁股都磨烂，弓腰腰痛得睡不了觉的痛苦，所以练新生的时候也狠不下这个心，放的太多了，让他们太舒服了，才导致那时我们出去比赛是有时会比较懒散的情况。才让现在大二这届会出现有时过来有时缺席的情况，这也是我们的问题，当时没有把他们的心抓住在龙舟队，当初管理他们的纪律太过松散，才导致今天这样的情况发生。一直到七号，来的人一直是只有半船人，枫爷都看不过去了，而且大一海滨的师弟还要慢慢地纠正他们的动作，同时训练他们的力量，这在备赛期间就感觉比较晚了，而且这次纠正好了动作下次就不过来了，感觉像是在做无用功，这样的训练感觉一塌糊涂，技术实力参差不齐，各种问题多如牛毛，确实也没办法。终于，大二的队长佩杰终于跟我讲了今年不去比赛这个通知，当我一听到这个消息的时候，我感觉我的心都凉了，我这个大学最后再癫一次的计划就这样吹了，这个消息来的猝不及防。不过想来也是，既然代表学校出去比赛，不能给学校丢脸啊，我们这样就出去了，这不是让别人看笑话吗，到时去了预赛就被别人刷了，哭也没眼泪啊，自己不去努力，能去怪谁？所以队长这决定也没错，大三这么多的高手都不去了，我们这几个渣渣在硬着头皮上也没什么意思。(但当我知道了真相的时候我还是有点不甘心，确实心中略有不爽)<br>&emsp;&emsp;好吧，不扯这没用的，不在这里瞎鸡巴抱怨了，还是谈谈自己吧。<br><img src="http://i1.piimg.com/593768/da839e8c02366fa6.jpg" alt="龙舟1"><br>&emsp;&emsp;回想起前天在喊的那熟悉的口号，“拼尽全力，唯我龙舟，干！！！”，每次喊出这句口号时，总是能让人热血沸腾的，即使心中有多少的不爽，这一喊出来，所有的憋屈都飘到九霄云外了。感觉当年来到龙舟队确实是个正确的选择，虽然训练很辛苦、很枯燥，但收获很多，收获到的不仅仅是兄弟般的情义，自己的意志也更坚定了，而且也知道了为人处世，如何处理好人际关系，如何团队协作。知道了龙舟队就要做到一条船，一条心。<br><img src="http://i2.muimg.com/593768/e452c46876298305.jpg" alt="龙舟2"><br>&emsp;&emsp;仍能想起当年大一时两船人在西湖上欢声笑语的像疯狗一样的比拼；还记得当年大一时划桨慢半拍全程被枫哥叼的时候；依旧记得那水上训练结束上岸后那一组组俯卧撑做得我们鬼哭狼嚎的样子；仍记得当时陆上训练时那在中心广场的响彻校园的嚎叫，练完后直接躺尸在中心广场，踢都不愿动；仍记得那年说要选拔时生怕自己选不上而周末给自己加量的日子。现在想着依然像是昨天发生一样，那一起趴在中心广场上欣赏的夜空，现在依然能想得起来；依旧记得那些屁股磨烂，上课只能站着听课的日子；依然记得去年湛江比赛的时候，最后赢得冠军时那振臂高呼的景象，这两年的回忆实在是太多太多了。发现我在龙舟队坚持下去的原因已经不是因为当年康爷在龙舟队里面干过这么简单了，而是对龙舟队有了感情，这是一种情怀。正如枫爷所说过的，以后大学毕业后，你有女朋友的话还能怀念一下大学谈恋爱的时光；若是你没有女朋友的话呢，能怀念的也就只有龙舟队的日子了。想来也是，像我这没女朋友的，在龙舟队呆了两年多了，对队里总是有一种难以割舍的感情。虽然大家都互不相识，既无血缘关系，也不是同班同专业的同学，但是经过了两年同甘共苦一起喊一起辛苦，一起受伤，一起打闹，一起疯颠，一起为胜利而高唱校歌，渐渐地，我也爱上了这个运动，而且对这个队伍有一种说不出的感觉，感觉已成为我生命中不可或缺的一部分了。俗话说，天下无不散之宴席，心中虽略有不舍，却又不得不离开。<br><img src="http://i2.muimg.com/593768/c7b930a4eb48938d.jpg" alt="龙舟3"><br>&emsp;&emsp;还记得那年选拔选上了正式队员，而且还顺利的得到了去广西比赛的机会，成为队里唯一一个非体院的队员，直到现在，我这届不是体院的只剩我一个了。现在是真正体会到了人走茶凉的什么个感受了，也不知道以后龙舟队会发展的怎样，我也管不了太多了，虽然很想很想跟着你们一起继续干完一场又一场的比赛，但是时间也不允许我再去做这些事啦，也就认老了吧！<br>                                                                                Grandpa An<br>                                                                        2017年5月9日 01:34<br>                                                                        写于广东海洋大学<br>                                                                        海乐A206</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://i2.muimg.com/593768/510ef14a1fb1ee4a.jpg&quot; alt=&quot;龙舟&quot;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&amp;emsp;&amp;emsp;虽然我不想认老，但现在已是大三下学期了，不得不说已经到了该退出的时候了。前几个星期听说贵州铜仁有场比赛的时候，而且比的还是标舟，我心里一直不能平静，心里一团火仿佛重新被点燃了一般，觉着这平淡的大学生活好像又有了一个目标一样，久违的热血流淌全身，感觉激情依旧，仍能应战，说战便战，把这次比赛当成是大学最后的疯狂，要疯就要一疯到底，也算是给大学生涯画上一个完美的句号。
+    
+    </summary>
+    
+    
+      <category term="龙舟" scheme="http://yoursite.com/tags/%E9%BE%99%E8%88%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>上传一些以前的作品</title>
+    <link href="http://yoursite.com/2017/01/11/%E4%B8%8A%E4%BC%A0%E4%B8%80%E4%BA%9B%E6%88%91%E4%BB%A5%E5%89%8D%E7%9A%84%E4%BD%9C%E5%93%81/"/>
+    <id>http://yoursite.com/2017/01/11/上传一些我以前的作品/</id>
+    <published>2017-01-11T07:07:42.000Z</published>
+    <updated>2017-05-11T02:34:21.552Z</updated>
+    
+    <content type="html"><![CDATA[<p>发现文章太少，闲来无事，想着写一些东西，感觉也没啥东西可写，所以只好贴图了。<br>下面来贴一些我以前的闲情逸致而弄的作品。<br><a id="more"></a><br>天使<br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/0L0V0V0a2D03173k0Q2S/tianshi.jpg?v=096eb5ee" alt="天使"></p><p>罗曼鹤<br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/2p472v3A2N1k0A1W2M43/he1.jpg?v=673fae7f" alt="鹤1"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/3a3913191K2V3k262d39/he2.jpg?v=f207d202" alt="鹤2"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/360H1m3p3P3O1R0k3h1M/he3.jpg?v=fc5bf50d" alt="鹤3"></p><p>玫瑰花<br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/1B212P3H3j0Y0N31002k/hua1.jpg?v=7d1f0332" alt="花1"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/213w1R2a372C0O2i2Y2P/hua2.jpg?v=3e0cbe59" alt="花2"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/2T1U2J0H2z0N1t001f2i/hua3.jpg?v=f6dfe210" alt="花3"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/2D032u1X160N323I2p0Y/hua4.jpg?v=6f0d51ba" alt="花4"></p><p>马<br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/3v1D2y1E171D2Z3L2s25/ma1.jpg?v=f53a879d" alt="马1"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/3i111D3D2C031d3T1g1B/ma2.jpg?v=d1555467" alt="马2"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/2e3r1e2A1p0L3y0U3j3Y/ma3.jpg?v=03485204" alt="马3"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/44203i1p1a1j331z1W2k/ma4.jpg?v=2b8d3606" alt="马4"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/1B0w2r2W0o1q1e1t1S02/ma5.jpg?v=f84312c1" alt="马5"></p><p>古代龙<br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/1X0G3K2l3S133H0z1n3y/long1.jpg?v=8ec223d1" alt="龙1"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/2l2F420P333P3b1j1r3G/long2.jpg?v=4f6fde91" alt="龙2"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/3Q3x0E3B3g302k2M3h1q/long3.jpg?v=f77e9bd8" alt="龙3"></p><p>龟<br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/2e0d3B1p091W2x30370I/gui1.jpg?v=51b91a74" alt="龟1"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/0q1G252m3C301H06103e/gui2.jpg?v=52811f9c" alt="龟2"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/370h0o2n2Z0Q463x3e06/gui3.jpg?v=73297436" alt="龟3"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/3h2e2O391i1R1B121K0Y/gui4.jpg?v=3675629a" alt="龟4"></p><p>姬深山锹形虫<br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/0o3F0x2o0C3z0V2E170p/chong1.jpg?v=969ac782" alt="虫1"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/1R3a1s2x0n0M442Y3346/chong2.jpg?v=8d632e8b" alt="虫2"><br><img src="https://d17oy1vhnax1f7.cloudfront.net/items/340b3z3m470u282K0C2Y/fenghuang.jpg?v=f701c669" alt="凤凰"></p><p>好了，到此完毕！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;发现文章太少，闲来无事，想着写一些东西，感觉也没啥东西可写，所以只好贴图了。&lt;br&gt;下面来贴一些我以前的闲情逸致而弄的作品。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="折纸" scheme="http://yoursite.com/tags/%E6%8A%98%E7%BA%B8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第一篇博文</title>
+    <link href="http://yoursite.com/2017/01/11/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E6%96%87/"/>
+    <id>http://yoursite.com/2017/01/11/第一篇博文/</id>
+    <published>2017-01-11T01:56:49.000Z</published>
+    <updated>2017-05-30T02:17:41.740Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp;历时三个小时，终于把博客的雏形做了出来了，做完以后打开的第一次打开的感觉，就是感觉自己棒棒哒！</p><p>既然是第一篇博文，那我就瞎鸡巴乱写一通好了。</p><p>好了，做了一早上，今天先这样，日后再继续完善。</p><p>我这个个人博客我不打算绑定域名，只等待有缘人来访。</p><p>还有，下面的二维码你们想扫就扫，我不会拦你们的</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&amp;emsp;&amp;emsp;历时三个小时，终于把博客的雏形做了出来了，做完以后打开的第一次打开的感觉，就是感觉自己棒棒哒！&lt;/p&gt;
+&lt;p&gt;既然是第一篇博文，那我就瞎鸡巴乱写一通好了。&lt;/p&gt;
+&lt;p&gt;好了，做了一早上，今天先这样，日后再继续完善。&lt;/p&gt;
+&lt;p&gt;我这个个人博客我不
+      
+    
+    </summary>
+    
+    
+      <category term="瞎鸡巴乱写" scheme="http://yoursite.com/tags/%E7%9E%8E%E9%B8%A1%E5%B7%B4%E4%B9%B1%E5%86%99/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2016/05/09/hello-world/"/>
+    <id>http://yoursite.com/2016/05/09/hello-world/</id>
+    <published>2016-05-09T01:40:42.000Z</published>
+    <updated>2017-12-04T08:19:10.041Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+      <category term="blog" scheme="http://yoursite.com/tags/blog/"/>
+    
+  </entry>
+  
+</feed>
